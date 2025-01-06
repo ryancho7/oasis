@@ -1,0 +1,65 @@
+.homepage {
+    display: flex;
+    height: 100vh;
+}
+
+.welcome-section {
+    width: 60%;
+    padding: 5em;
+    background: linear-gradient(to bottom right, rgba(177, 147, 247, 0.8), rgba(255, 142, 88, 0.8));
+}
+
+.login-section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-left: 5em;
+}
+
+.welcome-section h1, .welcome-section h3  {
+    color: white;
+}
+
+.welcome-section h1 {
+    font-size: 6em;
+    margin-bottom: 0;
+}
+
+.welcome-section h3 {
+    font-weight: 300;
+}
+
+.login-section h3 {
+    color: rgba(177, 147, 247, 0.8)
+}
+
+.login-section h1 {
+    color: gainsboro;
+}
+
+.home-page-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, rgba(177, 147, 247, 0.8), rgba(255, 142, 88, 0.8));
+    border-radius: 30px;
+    border-width: 0;
+    color: white;
+    padding: 1em;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.home-page-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, rgba(177, 147, 247, 0.8), rgba(255, 142, 88, 0.8));
+}
+
+.google-icon {
+    padding-right: 1em;
+}

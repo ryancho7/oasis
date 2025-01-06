@@ -1,0 +1,22 @@
+.sidebar {
+    padding: 2em;
+    color: rgba(139, 137, 137, 1);
+}
+
+.group-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.group-item {
+    padding: 1em 0em;
+}
+
+.group-item:hover {
+    color: white;
+}
+
+.group-item.active {
+    color: white;
+}
