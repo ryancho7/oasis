@@ -1,6 +1,17 @@
 .sidebar {
     padding: 2em;
     color: rgba(139, 137, 137, 1);
+    display: flex;
+    height:100%;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.sidebar-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
 }
 
 .group-list {
@@ -18,5 +29,53 @@
 }
 
 .group-item.active {
+    color: white;
+}
+
+.user-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.signout-icon:hover {
+    color: white;
+}
+
+.line {
+    border: none;
+    border-bottom: 1px solid;
+}
+
+.create-group-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.create-group-input {
+    border: none;
+    background: none;
+}
+
+.create-group-input:focus {
+    outline: none;
+    color: rgba(139, 137, 137, 1);
+}
+
+.create-group-input:hover::placeholder {
+    color: white;
+}
+
+.add-icon:hover {
     color: white;
 }

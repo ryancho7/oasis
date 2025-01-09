@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import '../styles/Dashboard.css';
+import { FaUsers } from "react-icons/fa6";
+import { AuthContext } from "../AuthContext";
 
 function Dashboard({ selectedGroup, groups }) {
+
+    const { user } = useContext(AuthContext);
+
+    if(!user) {
+        return (
+            <p>Loading...</p>
+        )
+    }
+
     if (!selectedGroup) {
         return <p>Select a group to view its contents.</p>;
     }
@@ -9,7 +21,17 @@ function Dashboard({ selectedGroup, groups }) {
 
     return (
         <div className="dashboard">
-            <h2>{group.name}</h2>
+            <h3 className="playlist-privacy">Public Playlist</h3>
+            <h1 className="group-name">{group.name}</h1>
+            <div className="playlist-data-bar">
+                <FaUsers />
+                <div className="user-name">
+                    {user.displayName}
+                </div>
+                
+                <span className="dot">•</span>
+                <div className="group-size">{groups[selectedGroup].websites.length} websites, {groups[selectedGroup].websites.length*5} minutes</div>
+            </div>
             <ul>
                 {group.websites.map((website) => (
                     <li key={website}>
@@ -65,29 +87,6 @@ export default Dashboard;
 //     }, [userRef, user]);
     
 
-//     const handleCreateGroup = async () => {
-//         if(!newGroup.trim()) return;
-
-//         const groupId = uuidv4(); // unique id for group
-//         const newGroupData = {
-//             [groupId] : {
-//                 name: newGroup,
-//                 websites: [],
-//             }
-//         }
-
-//         try {
-//             await updateDoc(userRef, {
-//                 groups: {...groups, ...newGroupData},
-//             });
-//             // update local state
-//             setGroups((prevGroups) => ({ ...prevGroups, ...newGroupData}));
-//             setNewGroup("");
-//         } catch (error) {
-//             console.log("Error in creating group: ", error);
-//         }
-//     }
-
 //     const handleAddWebsiteToGroups = async () => {
 //         if(!newWebsite.trim() || selectedGroups.length === 0) return;
 
@@ -130,25 +129,6 @@ export default Dashboard;
 //         }
 //     }
 
-//     const handleSignOut = async () => {
-//         try {
-//             setGroups({});
-//             await signOut(auth);
-//             navigate("/");
-//             console.log("Signed out");
-//         } catch (error) {
-//             console.log("Error signing out: ", error);
-//         }
-//     }
-
-//     if(loading) {
-//         return <p>Loading ...</p>
-//     }
-
-//     if(!user) {
-//         navigate("/");
-//         return null;
-//     }
 
 //     return (
 //         <div>

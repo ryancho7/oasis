@@ -1,0 +1,34 @@
+.dashboard {
+    padding: 2em;
+}
+
+.group-name {
+    margin-top: 0;
+}
+
+.playlist-privacy {
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+    font-size: small;
+}
+
+.playlist-data-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+}
+
+.user-name {
+    padding: 0 0.3em;
+}
+
+.dot {
+    color: rgba(105, 104, 104, 0.8);
+}
+
+.group-size {
+    padding: 0 0.3em;
+    color: rgba(105, 104, 104, 0.8);
+}

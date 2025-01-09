@@ -5,12 +5,14 @@ import Profile from "./pages/Profile";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-      </Routes>
-    </BrowserRouter>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
   )
 }
 
