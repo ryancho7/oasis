@@ -81,6 +81,43 @@ function Profile() {
 
     }
 
+    const handleRemoveWebsite = async (groupId, website) => {
+        const updatedGroup = {
+            ...groups[groupId],
+            websites: groups[groupId].websites.filter((w) => w !== website)
+        };
+
+        const updatedGroups = { ...groups, [groupId]: updatedGroup };
+        // update firestore + local state
+        try {
+            await updateDoc(userRef, {
+                groups: updatedGroups
+            });
+            setGroups(updatedGroups);
+        } catch (error) {
+            console.log("Error removing website:", error);
+        }
+    }
+
+    const handleAddWebsite = async (groupId, website) => {
+        const updatedGroups = {
+            ...groups,
+            [groupId]: {
+                ...groups[groupId],
+                websites: [ ...groups[groupId].websites, website]
+            }
+        }
+
+        try {
+            await updateDoc(userRef, {
+                groups: updatedGroups
+            });
+            setGroups(updatedGroups);
+        } catch (error) {
+            console.log("Error adding website to groups: ", error);
+        }
+    }
+
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -100,6 +137,8 @@ function Profile() {
                 <Dashboard 
                     selectedGroup={selectedGroup}
                     groups={groups}
+                    handleRemoveWebsite={handleRemoveWebsite}
+                    handleAddWebsite={handleAddWebsite}
                 />
             </div>
         </div>

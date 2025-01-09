@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import '../styles/Dashboard.css';
 import { FaUsers } from "react-icons/fa6";
 import { AuthContext } from "../AuthContext";
+import { MdOutlinePlaylistRemove, MdOutlinePlaylistAdd  } from "react-icons/md";
 
-function Dashboard({ selectedGroup, groups }) {
+function Dashboard({ selectedGroup, groups, handleRemoveWebsite, handleAddWebsite }) {
 
     const { user } = useContext(AuthContext);
+
+    const [ websiteToAdd, setWebsiteToAdd ] = useState("");
 
     if(!user) {
         return (
@@ -35,12 +38,29 @@ function Dashboard({ selectedGroup, groups }) {
             <ul>
                 {group.websites.map((website) => (
                     <li key={website}>
-                        <a href={website} target="_blank" rel="noopener noreferrer">
-                            {website}
-                        </a>
+                        <div className="website-info">
+                            <a href={website} target="_blank" rel="noopener noreferrer">
+                                {website}
+                            </a>
+                            <p>{group.name}</p>
+                            <p>Public</p>
+                            <MdOutlinePlaylistRemove 
+                                className="remove-icon" 
+                                size={30}
+                                onClick={() => handleRemoveWebsite(selectedGroup, website)}/>
+                        </div>
                     </li>
                 ))}
             </ul>
+            <div className="add-website-bar">
+                <input
+                    type="text"
+                    placeholder="Add a Website"
+                    value={websiteToAdd}
+                    onChange={(e) => setWebsiteToAdd(e.target.value)}
+                />
+                <MdOutlinePlaylistAdd size={30} onClick={() => handleAddWebsite(selectedGroup, websiteToAdd)}/>
+            </div>
         </div>
     );
 }
@@ -87,47 +107,6 @@ export default Dashboard;
 //     }, [userRef, user]);
     
 
-//     const handleAddWebsiteToGroups = async () => {
-//         if(!newWebsite.trim() || selectedGroups.length === 0) return;
-
-//         const updatedGroups = { ...groups };
-
-//         selectedGroups.forEach((groupId) => {
-//             updatedGroups[groupId] = {
-//                 ...updatedGroups[groupId],
-//                 websites: [ ...updatedGroups[groupId].websites, newWebsite]
-//             }
-//         });
-
-//         // update firestore
-//         try {
-//             await updateDoc(userRef, {
-//                 groups: updatedGroups
-//             });
-//             // updated local state
-//             setGroups(updatedGroups);
-//             setNewWebsite("");
-//             setSelectedGroups([]);
-//         } catch (error) {
-//             console.log("Error adding website to groups: ", error);
-//         }
-//     }
-
-//     const handleRemoveWebsiteFromGroups = async (groupId, website) => {
-//         const updatedGroup = {
-//             ...groups[groupId],
-//             websites: groups[groupId].websites.filter((w) => w !== website),
-//         };
-//         const updatedGroups = { ...groups, [groupId]: updatedGroup };
-//         try {
-//             await updateDoc(userRef, {
-//                 groups: updatedGroups,
-//             });
-//             setGroups(updatedGroups);
-//         } catch (error) {
-//             console.log("Error in removing website: ", error);
-//         }
-//     }
 
 
 //     return (

@@ -32,3 +32,29 @@
     padding: 0 0.3em;
     color: rgba(105, 104, 104, 0.8);
 }
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.website-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.website-info:hover {
+    color: rgba(139, 137, 137, 1);
+}
+
+.add-website-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
