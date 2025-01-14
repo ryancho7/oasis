@@ -1,0 +1,36 @@
+.playlist-card {
+    border-radius: 5px;
+    /* background: linear-gradient(to bottom right, rgba(177, 147, 247, 0.8), rgba(255, 142, 88, 0.8)); */
+    background: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1em;
+    box-sizing: border-box;
+}
+
+.group-name {
+    font-weight: 500;
+    font-size: large;
+    color: white
+}
+
+.play-icon {
+    cursor: pointer;
+    transition: color 0.2s ease;
+    color: white;
+}
+
+.play-icon:hover {
+    color: rgba(8, 252, 0, 0.8);
+}

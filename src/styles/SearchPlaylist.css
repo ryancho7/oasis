@@ -1,0 +1,14 @@
+.search-dashboard {
+    padding: 2em;
+}
+
+.search-bar {
+    margin-bottom: 1em;
+}
+
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    grid-auto-rows: minmax(300px, auto);
+}

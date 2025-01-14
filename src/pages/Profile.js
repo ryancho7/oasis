@@ -8,6 +8,8 @@ import { auth, db } from "../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
+import SearchPlaylist from "./SearchPlaylist";
+import Feed from "./Feed";
 
 function Profile() {
     const { user, loading } = useContext(AuthContext);
@@ -17,7 +19,8 @@ function Profile() {
 
     const [ groups, setGroups ] = useState({});
     const [ selectedGroup, setSelectedGroup ] = useState(null);
-    // const [ newGroup, setNewGroup ] = useState("");
+    const [ searchPlaylist, setSearchPlaylist ] = useState(false);
+    const [ viewingFeed, setViewingFeed ] = useState(false);
 
     // Redirect user if they are logged out
     useEffect(() => {
@@ -129,18 +132,36 @@ function Profile() {
                     groups={groups}
                     selectedGroup={selectedGroup}
                     onSelectGroup={setSelectedGroup}
+                    searchQuery={searchPlaylist}
+                    onSearchPlaylist={setSearchPlaylist}
                     handleCreateGroup={handleCreateGroup}
                     handleSignOut={handleSignOut}
+                    viewingFeed={viewingFeed}
+                    onViewingFeed={setViewingFeed}
                 />
             </div>
-            <div className="dashboard-component">
-                <Dashboard 
-                    selectedGroup={selectedGroup}
-                    groups={groups}
-                    handleRemoveWebsite={handleRemoveWebsite}
-                    handleAddWebsite={handleAddWebsite}
-                />
-            </div>
+            {searchPlaylist ? (
+                <div className="dashboard-component">
+                    <SearchPlaylist 
+                        groups={groups}
+                        onSelectGroup={setSelectedGroup}
+                        onSearchPlaylist={setSearchPlaylist}
+                    />
+                </div>
+            ) : viewingFeed ? (
+                <div className="search-playlist-component">
+                    <Feed />
+                </div>
+            ) : (
+                <div className="search-playlist-component">
+                    <Dashboard 
+                        selectedGroup={selectedGroup}
+                        groups={groups}
+                        handleRemoveWebsite={handleRemoveWebsite}
+                        handleAddWebsite={handleAddWebsite}
+                    />
+                </div>
+            )}
         </div>
     )
 }

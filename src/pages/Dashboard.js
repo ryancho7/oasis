@@ -22,6 +22,13 @@ function Dashboard({ selectedGroup, groups, handleRemoveWebsite, handleAddWebsit
 
     const group = groups[selectedGroup];
 
+    const handleSubmit = () => {
+        if(websiteToAdd.trim()) {
+            handleAddWebsite(selectedGroup, websiteToAdd);
+            setWebsiteToAdd("");
+        }
+    };
+
     return (
         <div className="dashboard">
             <h3 className="playlist-privacy">Public Playlist</h3>
@@ -35,132 +42,46 @@ function Dashboard({ selectedGroup, groups, handleRemoveWebsite, handleAddWebsit
                 <span className="dot">•</span>
                 <div className="group-size">{groups[selectedGroup].websites.length} websites, {groups[selectedGroup].websites.length*5} minutes</div>
             </div>
+            <div className="headers">
+                <h3 className="url">URL</h3>
+                <div className="other-headers">
+                    <h3>Link Category</h3>
+                    <h3>Privacy</h3>
+                    <h3>Options</h3>
+                </div>
+            </div>
+            <hr className="line"/>
             <ul>
                 {group.websites.map((website) => (
                     <li key={website}>
                         <div className="website-info">
-                            <a href={website} target="_blank" rel="noopener noreferrer">
+                            <a href={website} target="_blank" rel="noopener noreferrer" className="link">
                                 {website}
                             </a>
-                            <p>{group.name}</p>
-                            <p>Public</p>
-                            <MdOutlinePlaylistRemove 
-                                className="remove-icon" 
-                                size={30}
-                                onClick={() => handleRemoveWebsite(selectedGroup, website)}/>
+                            <div className="columns">
+                                <p>{group.name}</p>
+                                <p>Public</p>
+                                <MdOutlinePlaylistRemove 
+                                    className="remove-icon" 
+                                    size={30}
+                                    onClick={() => handleRemoveWebsite(selectedGroup, website)}/>
+                            </div>
                         </div>
                     </li>
                 ))}
             </ul>
             <div className="add-website-bar">
                 <input
+                    className="add-website"
                     type="text"
                     placeholder="Add a Website"
                     value={websiteToAdd}
                     onChange={(e) => setWebsiteToAdd(e.target.value)}
                 />
-                <MdOutlinePlaylistAdd size={30} onClick={() => handleAddWebsite(selectedGroup, websiteToAdd)}/>
+                <MdOutlinePlaylistAdd size={30} onClick={handleSubmit}/>
             </div>
         </div>
     );
 }
 
 export default Dashboard;
-
-
-// import { signOut } from "firebase/auth";
-// import { auth, db } from "../firebase";
-// import { useNavigate } from "react-router-dom";
-// import { useContext, useEffect, useState } from "react";
-// import { AuthContext } from "../AuthContext";
-// import { doc, getDoc, updateDoc } from "firebase/firestore";
-// import { v4 as uuidv4 } from "uuid";
-
-// function Dashboard() {
-
-//     const { user, loading } = useContext(AuthContext);
-//     const navigate = useNavigate();
-
-//     const userRef = user ? doc(db, "users", user.uid) : null;
-
-//     const [ groups, setGroups ] = useState({});
-//     const [ newGroup, setNewGroup ] = useState("");
-//     const [ selectedGroups, setSelectedGroups ] = useState([]);
-//     const [ newWebsite, setNewWebsite ] = useState("");
-
-//     useEffect(() => {
-//         const fetchGroups = async () => {
-//             if (user) {
-//                 try {
-//                     const userSnap = await getDoc(userRef);
-//                     if (userSnap.exists()) {
-//                         const userData = userSnap.data();
-//                         setGroups(userData.groups || {});
-//                     }
-//                 } catch (error) {
-//                     console.error("Error fetching groups: ", error);
-//                 }
-//             }
-//         };
-    
-//         fetchGroups();
-//     }, [userRef, user]);
-    
-
-
-
-//     return (
-//         <div>
-//             <h1>Welcome {user.displayName}</h1>
-//             <p>Email: {user.email}</p>
-//             <button onClick={handleSignOut}>Sign Out</button>
-
-//             <h2>Your Groups</h2>
-
-//             <div>
-//                 <input
-//                     type="text"
-//                     value={newGroup}
-//                     onChange={(e) => setNewGroup(e.target.value)}
-//                 />
-//                 <button onClick={handleCreateGroup}>Create New Group</button>
-//             </div>
-
-//             {Object.keys(groups).map((groupId) => (
-//                 <div key={groupId}>
-//                     <h3>{groups[groupId].name}</h3>
-//                     <ul>
-//                         {groups[groupId].websites.map((website) => (
-//                             <li key={website}>
-//                                 <a href={website} target="_blank" rel="noopener noreferrer">{website}</a>
-//                                 <button onClick={() => handleRemoveWebsiteFromGroups(groupId, website)}>Remove</button>
-//                             </li>
-//                         ))}
-//                     </ul>
-//                 </div>
-//             ))}
-
-//             <div>
-//                 <select 
-//                     multiple={true} 
-//                     value={selectedGroups}
-//                     onChange={(e) => setSelectedGroups(Array.from(e.target.selectedOptions, (option) => option.value))}
-//                 >
-//                     {Object.keys(groups).map((groupId) => (
-//                         <option key={groupId} value={groupId}>
-//                             {groups[groupId].name}
-//                         </option>
-//                     ))}
-//                 </select>
-//                 <input 
-//                     type="text"
-//                     value={newWebsite}
-//                     onChange={(e) => setNewWebsite(e.target.value)}
-//                 />
-//                 <button onClick={handleAddWebsiteToGroups}>Add Website</button>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Dashboard;

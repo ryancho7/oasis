@@ -79,3 +79,27 @@
 .add-icon:hover {
     color: white;
 }
+
+.search-playlists {
+    cursor: pointer;
+}
+
+.search-playlists.active {
+    color: white;
+}
+
+.search-playlists:hover {
+    color: white;
+}
+
+.view-feed {
+    cursor: pointer;
+}
+
+.view-feed:hover {
+    color: white;
+}
+
+.view-feed.active {
+    color: white;
+}
